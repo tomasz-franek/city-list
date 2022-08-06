@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.14.xsd">
+	<preConditions>
+		<dbms type="mysql"/>
+	</preConditions>
+	<changeSet id="city_data_0001" author="x" runOnChange="false" failOnError="true" dbms="mysql" runAlways="false" context="all">
+		<comment>init table `city`.`city`</comment>
+		<loadData encoding="UTF-8"
+				  file="cities_1_1.csv"
+				  schemaName="city"
+				  separator=","
+				  tableName="city">
+			<column header="id" name="cityId" type="NUMERIC"/>
+			<column header="name" name="name" type="STRING"/>
+			<column header="photo" name="photoLink" type="STRING"/>
+		</loadData>
+	</changeSet>
+	<changeSet id="city_data_0002" author="x" runOnChange="false" failOnError="true" dbms="mysql" runAlways="false" context="all">
+		<comment>init table `city`.`user`</comment>
+		<sql>INSERT INTO `city`.`user` (`name`, `password`) VALUES ('user', 'user')</sql>
+		<sql>INSERT INTO `city`.`user` (`name`, `password`) VALUES ('editor', 'editor')</sql>
+	</changeSet>
+	<changeSet id="city_data_0003" author="x" runOnChange="false" failOnError="true" dbms="mysql" runAlways="false" context="all">
+		<comment>init table `city`.`role`</comment>
+		<sql>INSERT INTO `city`.`role` (`userId`,`name`) SELECT userId, 'EDITOR' from `city`.`user` where name = 'editor'</sql>
+		<sql>INSERT INTO `city`.`role` (`userId`,`name`) SELECT userId, 'USER' from `city`.`user` where name = 'editor'</sql>
+		<sql>INSERT INTO `city`.`role` (`userId`,`name`) SELECT userId, 'USER' from `city`.`user` where name = 'user' </sql>
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,29 @@
+<div class="card text-bg-light border-primary h-100">
+  <div *ngIf="city != null">
+    <div class="row">
+      <h5 class="card-title text-center">{{city.name}}</h5>
+    </div>
+    <div  [hidden]="error" >
+      <div class="card-body">
+        <img class="card-img-top" [src]="city.photoLink" alt="error"  (error)="showError()" width="300" height="240">
+      </div>
+    </div>
+    <div [hidden]="!error" >
+      <div class="card-body" >
+        <i class="bi bi-cloud-slash text-danger me-2" style="font-size: 4rem;"></i>
+        <span id="imageError">The image cannot be shown</span>
+      </div>
+    </div>
+    <div class="row ms-2 mb-2 col-2">
+      <button type="button" id="edit" [hidden]="!isEditor()" class="btn btn-default btn-outline-primary" (click)="editPicture()" >
+        <i class="bi bi-pencil-square" ></i>
+      </button>
+    </div>
+  </div>
+  <div *ngIf="city == null">
+    <div class="card-body">
+      <i class="bi bi-slash-square" alt="Not found"></i>
+      <h5 class="card-title" id="noData">City data not found</h5>
+    </div>
+  </div>
+</div>

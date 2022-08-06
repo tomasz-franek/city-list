@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+		xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-4.14.xsd">
+	<preConditions>
+		<dbms type="mysql"/>
+	</preConditions>
+
+
+	<changeSet id="city_0001" author="x" runOnChange="false" failOnError="true" dbms="mysql" runAlways="false" context="all">
+		<comment>set colate and charset</comment>
+		<sql>CREATE database IF NOT EXISTS `city`</sql>
+		<sql>alter database `city` DEFAULT COLLATE utf8_unicode_ci</sql>
+		<sql>SET collation_connection = 'utf8_unicode_ci'</sql>
+	</changeSet>
+	<changeSet id="city_0002" author="x" runOnChange="false" failOnError="true" dbms="mysql" runAlways="false"
+			   context="all">
+		<comment>table `city`.`user`</comment>
+		<sql splitStatements="false" stripComments="false">
+			<![CDATA[
+            CREATE TABLE `city`.`user` (
+              `userId` int(11) NOT NULL AUTO_INCREMENT,
+              `name` varchar(45) character set utf8 NOT NULL,
+              `password` varchar(45) character set utf8 NOT NULL,
+              PRIMARY KEY (`userId`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+            ]]>
+		</sql>
+	</changeSet>
+	<changeSet id="city_0003" author="tf" runOnChange="false" failOnError="true" dbms="mysql" runAlways="false" context="all">
+		<comment>table `city`.`city`</comment>
+		<sql splitStatements="false" stripComments="false">
+			<![CDATA[
+            CREATE TABLE `city`.`city` (
+              `cityId` int(11) NOT NULL AUTO_INCREMENT,
+              `name` varchar(45) character set utf8 NOT NULL,
+              `photoLink` varchar(2000) character set utf8 NOT NULL,
+              PRIMARY KEY (`cityId`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+            ]]>
+		</sql>
+	</changeSet>
+	<changeSet id="city_0004" author="tf" runOnChange="false" failOnError="true" dbms="mysql" runAlways="false" context="all">
+		<comment>table `city`.`role`</comment>
+		<sql splitStatements="false" stripComments="false">
+			<![CDATA[
+            CREATE TABLE `city`.`role` (
+              `roleId` int(11) NOT NULL AUTO_INCREMENT,
+              `userId` int(11) NOT NULL,
+              `name` varchar(10) character set utf8 NOT NULL,
+              PRIMARY KEY (`roleId`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+            ]]>
+		</sql>
+	</changeSet>
+</databaseChangeLog>

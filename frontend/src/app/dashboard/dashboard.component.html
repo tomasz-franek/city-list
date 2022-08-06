@@ -1,0 +1,48 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <a class="navbar-brand" href="#">
+    <i class="bi bi-camera"></i>
+    City List
+  </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <span class="align-content-end navbar-text fw-bold">Logger user : {{user.name}}</span>
+    <a class="nav-item ms-2"  id="logout" (click)="logoutUser()">Logout</a>
+  </div>
+</nav>
+<div class="container">
+  <div class="row mt-2">
+    <div class="input-group me-2">
+      <div class="input-group-prepend">
+        <span class="input-group-text" id="search"><i class="bi bi-search"></i></span>
+      </div>
+      <input [(ngModel)]="cityName" (ngModelChange)="searchByName($event)" aria-describedby="search" aria-label="Search" class="form-control" id="cityName"
+             name="cityName" placeholder="City name" required type="text">
+    </div>
+
+    <div class="col-8 mt-2">
+      <nav aria-label="Page navigation example">
+        <ul class="pagination">
+          <li class="page-item"><a class="page-link" (click)="setPage(0)">First Page</a></li>
+          <li class="page-item" id="prev" [class.disabled]="page==0"><a class="page-link" (click)="setPage(page-1)">Previous
+            page</a></li>
+          <li class="page-item"><a class="page-link" (click)="setPage(page)">{{page}}</a></li>
+          <li class="page-item" id="next" [class.disabled]="page==totalPages-1"><a class="page-link" (click)="setPage(page+1)">NextPage</a>
+          </li>
+          <li class="page-item" ><a class="page-link" (click)="setPage(totalPages-1)">Last Page</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+
+  </div>
+
+  <div class="row row-cols-4 g-4">
+    <div *ngFor="let city of cities">
+      <app-card class="justify-content-evenly" style="min-height: 400px;" [city]="city" [user]="user"></app-card>
+    </div>
+  </div>
+</div>
