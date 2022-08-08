@@ -21,12 +21,12 @@ Tested on ubuntu with
 
    ```mvn install -P default```
 
-6. Copy __war__ file from __/backend/target/__ directory to the web server. Application base path is __/city-list__
+6. Copy __war__ file from __/backend/target/__ directory to the web server. Application base path is __/city-list__. On tomcat the application URL should be http://localhost:8080/city-list/index.html
 
 ## Development
 
 Start backend spring boot application
-```aidl
+```shell
 cd /backend
 mvn spring-boot:run
 ```
@@ -34,7 +34,7 @@ mvn spring-boot:run
 Spring boot application is running on the port 9040
 
 Start frontend Angular
-```aidl
+```shell
 cd /frontend
 ng serve
 ```
@@ -42,7 +42,7 @@ Frontend angular is running on the port 4200 with configured proxy to backend po
 
 Run angular tests
 
-```aidl
+```shell
 cd /frontend
 ng test
 ```
